@@ -27,8 +27,8 @@ gulp.task('browserify', ['test'], () =>
     .pipe(gulp.dest('src'))
 );
 
-gulp.task('watch', () =>
-  gulp.watch(src_file, ['test', 'browserify', 'gas-upload'])
-);
+// gulp.task('watch', () =>
+//   gulp.watch(src_file, ['test', 'browserify', 'gas-upload'])
+// );
 
-gulp.task('default', ['test', 'browserify'], () => {});
+gulp.task('default', ['test', 'browserify', 'gas-upload'], () => {});

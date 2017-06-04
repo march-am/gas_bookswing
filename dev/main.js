@@ -5,8 +5,16 @@ global.main = () => {
   const label_name = 'bookswing';
   const mails = getMailsWithArray('label:' + label_name);
   const mail = mails[0];
-  Logger.log(mail.subject);
-  Logger.log(parseBWMailBody(mail.body));
+  const books = mails.map((mail) => {
+    const [title, author] = mail.subject.split(/ - /);
+    const body = parseBWMailBody(mail.body);
+    return {
+      author : author,
+      title  : title,
+      body   : body
+    }
+  });
+  Logger.log(books);
 
   // posts = [
   //   {

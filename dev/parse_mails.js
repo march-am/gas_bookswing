@@ -1,9 +1,9 @@
 const getMailsWithArray = (query) => {
   const threads = GmailApp.search(query);
   let mails = [];
-  threads.forEach(function(thread) {
+  threads.forEach((thread) => {
     const msgs = thread.getMessages();
-    msgs.forEach(function(msg) {
+    msgs.forEach((msg) => {
       mails.push({
         subject: msg.getSubject(),
         body: msg.getBody()
@@ -23,7 +23,7 @@ const parseBWMailBody = (body) => {
       posts[0] = { quote: '', memo: '', page: 0 };
   let post_cnt = 0, blank_cnt = 0;
 
-  lines.forEach(function(line) {
+  lines.forEach((line) => {
     line = line.trim();
     switch(true) {
       case REG_QUOTE.test(line):
