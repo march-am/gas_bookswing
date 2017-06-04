@@ -22,8 +22,10 @@ src/
 log/
 
 # project
-middleman.log
 vendor/bundle
 node_modules
 build
 .tmp
+
+# private
+gapps.config.json
