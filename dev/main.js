@@ -1,16 +1,8 @@
-// main.js
-import { getMailsWithArray, parseBWMailBody } from './parse_mails';
+import fetchMailsWithArray from './fetch_mails';
+import BWMailParser from './parse_mails';
 
 global.main = () => {
-  const mails = getMailsWithArray('label:bookswing');
-  const books = mails.map((mail) => {
-    const [title, author] = mail.subject.split(/ - /);
-    const posts = parseBWMailBody(mail.body);
-    return {
-      author : author,
-      title  : title,
-      posts  : posts
-    }
-  });
+  const mails = fetchMailsWithArray('label:bookswing');
+  const books = mails.map((mail) => { return new BWMailParser(mail).formatLines() });
   Logger.log(books);
 };
