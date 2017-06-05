@@ -4,17 +4,17 @@ export default class BWMailParser {
   }
 
   formatLines() {
-    const [TITLE, AUTHOR] = this.lines[0].split(/ - /);
-    const POSTS = this.parseBWMailBody();
+    const [title, author] = this.lines[0].split(/ - /);
+    const posts = this.parseBWMailBody();
     return {
-      author : AUTHOR,
-      title  : TITLE,
-      posts  : POSTS
+      author : author,
+      title  : title,
+      posts  : posts
     }
   }
 
   parseBWMailBody() {
-    const LINES_BODY = this.lines.slice(3);
+    const lines_body = this.lines.slice(3);
     const REG_QUOTE = /^\".+\"$/;
     const REG_BLANK = /^$/;
     const REG_PAGE = /^p\.\d+$/;
@@ -23,7 +23,7 @@ export default class BWMailParser {
         posts[0] = { quote: '', memo: '', page: 0 };
     let post_cnt = 0, blank_cnt = 0;
 
-    LINES_BODY.forEach((line) => {
+    lines_body.forEach((line) => {
       line = line.trim();
       switch(true) {
         case REG_QUOTE.test(line):
@@ -44,15 +44,17 @@ export default class BWMailParser {
           blank_cnt = 0;
           break;
         default:
-          posts[post_cnt].memo += line + '\n';
+          if(posts[post_cnt].memo) {
+            posts[post_cnt].memo += '\n';
+          }
+          posts[post_cnt].memo += line;
           blank_cnt = 0;
           break;
       }
     });
     // 最後余分に追加したHashを削除
-    if(!posts[post_cnt].page) {
-      posts.splice(post_cnt, 1);
-    }
+    if(!posts[post_cnt].page) { posts.pop() }
+
     return posts;
   }
 };
