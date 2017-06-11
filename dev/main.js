@@ -2,7 +2,7 @@ import fetchMailsWithArray from './fetch_mails';
 import BWMailParser from './parse_mails';
 import BWSheetWriter from './write_sheets';
 
-const FILE_ID = 'YOUR SPREADSHEET FILE ID';
+const FILE_ID = process.env.FILE_ID;
 const MAIL_SEARCH_QUERY = 'label:bookswing OR subject: "bw: "';
 
 global.main = () => {

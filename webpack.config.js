@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var WebpackShellPlugin = require('webpack-shell-plugin');
 var GasPlugin = require('gas-webpack-plugin');
+var Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './dev/main.js',
@@ -28,7 +29,8 @@ module.exports = {
     new GasPlugin(),
     new WebpackShellPlugin({
       onBuildEnd: ['gapps upload']
-    })
+    }),
+    new Dotenv()
   ],
   resolve: {
     extensions: ['.js']
