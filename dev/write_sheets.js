@@ -10,7 +10,7 @@ export default class BWSheetWriter {
         const sheet = this.ss.getSheetByName(book.title);
         if(sheet) { this.ss.deleteSheet(sheet); };
       } catch(e) {
-        Browser.msgBox(e);
+        Logger.log(e);
       }
     });
   }
@@ -25,7 +25,7 @@ export default class BWSheetWriter {
         sheet.getRange(1, 1, rows.length, rows[0].length)
              .setValues(rows);
       } catch(e) {
-        Browser.msgBox(e);
+        Logger.log(e);
       }
     });
   }
